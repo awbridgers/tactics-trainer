@@ -27,6 +27,7 @@ const Controls: React.FC<iProps> = ({
         <TouchableOpacity
           style={controlStyle.viewSolution}
           onPress={viewSolution}
+          testID = 'showSolution'
         >
           <Text style={{fontSize: 24, color: '#B3b3b3'}}>View Solution</Text>
         </TouchableOpacity>
@@ -37,7 +38,7 @@ const Controls: React.FC<iProps> = ({
   } else {
     return (
       <View style={controlStyle.end}>
-        <TouchableOpacity style={controlStyle.endButton} onPress={retry}>
+        <TouchableOpacity style={controlStyle.endButton} onPress={retry} testID = 'retry'>
           <FontAwesome5 name="backward" size={35} style={controlStyle.redo} />
           <Text style={{fontSize: 20, color: '#B3b3b3'}}>Retry</Text>
         </TouchableOpacity>

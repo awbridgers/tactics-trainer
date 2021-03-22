@@ -27,21 +27,21 @@ const Board: React.FC<Props> = ({
   selectedSquare,
   legalMoves,
 }) => {
-  const styleSquare = (file: number, rank: number): ViewStyle[] => {
+  const styleSquare = (rank: number, file: number): ViewStyle[] => {
     let squareStyle: ViewStyle[] = [];
     if (rank % 2 === 0) {
-      //if rank is odd, evens are dark and odds are even
+      //if rank is even, evens are light and odds are dark
       if (file % 2 === 0) {
-        squareStyle.push(style.darkSquare);
-      } else {
         squareStyle.push(style.lightSquare);
+      } else {
+        squareStyle.push(style.darkSquare);
       }
     } else {
-      //if rank is even, evens are light and odds are dark
+      //if rank is odd, odds are light and evens are dark
         if (file % 2 === 0) {
-          squareStyle.push(style.lightSquare);
-        } else {
           squareStyle.push(style.darkSquare);
+        } else {
+          squareStyle.push(style.lightSquare);
         }
       
     }

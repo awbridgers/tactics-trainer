@@ -1,20 +1,15 @@
 import React, {useState, useRef, useEffect, useContext} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
-  Alert,
-  Button,
-  TouchableOpacity,
 } from 'react-native';
 import Board from './components/board';
-import {Chess, Square, PieceType, Piece, Move} from 'chess.js';
+import {Chess, Square, PieceType, Move} from 'chess.js';
 import {convertCoords} from './helpers/convertCoords';
 import 'firebase/app';
 import 'firebase/database';
 import {FirebaseContext} from './helpers/firebase';
-import {PGN} from './types/PGN';
-import Parser, {PGNParse} from 'pgn-parser';
+import {PGNFormat, blankPGN} from './types/PGN';
 import {PGNMove} from 'pgn-parser';
 import gameStyle from './styles/game';
 import pgnString from './helpers/pgnString';
@@ -25,7 +20,7 @@ const Game = () => {
   const firebase = useContext(FirebaseContext);
   const chess = useRef(new Chess('8/8/8/8/8/8/8/8 w - - 0 1')).current;
   const moveHistory = useRef<string>('8/8/8/8/8/8/8/8 w - - 0 1');
-  const currentTactic = useRef<PGN>();
+  const currentTactic = useRef<PGNFormat>(blankPGN);
   const [selectedSquare, setSelectedSquare] = useState<Square | undefined>();
   const [secondClick, setSecondClick] = useState<boolean>(false);
   const [legalMoveSquares, setlegalMoveSquares] = useState<Square[]>([]);
@@ -132,9 +127,7 @@ const Game = () => {
           setPlayerMove(true);
           setSolution(theAnswer);
           setPlayerMove(true);
-        },500);
-      } else {
-        setPlayerMove(true);
+        }, 500);
       }
     }
   }, [playerMove, tacticActive, solution]);
@@ -195,21 +188,17 @@ const Game = () => {
     setLoadNewTactic(true);
   };
   const analysis = () => {
-    if (currentTactic.current) {
-      Linking.openURL(
-        `https://lichess.org/analysis/${currentTactic.current.fen}`
-      );
-    }
+    Linking.openURL(
+      `https://lichess.org/analysis/${currentTactic.current.fen}`
+    );
   };
   const retry = () => {
-    if (currentTactic.current) {
-      setAttemptedMove(undefined);
-      setMoveResults('');
-      setPlayerMove(true);
-      setSolution(currentTactic.current.pgn);
-      setTacticActive(true);
-      chess.load(currentTactic.current.fen);
-    }
+    setAttemptedMove(undefined);
+    setMoveResults('');
+    setPlayerMove(true);
+    setSolution(currentTactic.current.pgn);
+    setTacticActive(true);
+    chess.load(currentTactic.current.fen);
   };
 
   return (

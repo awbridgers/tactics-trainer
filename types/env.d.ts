@@ -7,7 +7,7 @@ declare module 'pgn-parser'{
     move:string;
     move_number?: number;
     ravs?: PGNMove[];
-    comments: string[];
+    comments?: string[];
   }
   export interface PGNParse{
     comments: string| null

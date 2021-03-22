@@ -15,9 +15,15 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
+    "@testing-library/jest-native": "^3.4.3",
+    "@testing-library/react-native": "^7.1.0",
     "@types/chess.js": "^0.10.1",
+    "@types/jest": "^26.0.20",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
+    "jest-expo": "^40.0.2",
+    "promise": "^8.1.0",
+    "promise-polyfill": "^8.2.0",
     "typescript": "~4.0.0"
   },
   "scripts": {
@@ -25,7 +31,24 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest --watch",
+    "coverage": "npm run test -- --coverage --watchAll=false"
   },
-  "private": true
+  "private": true,
+  "jest": {
+    "preset": "jest-expo",
+    "setupFilesAfterEnv": ["./setupTests.ts"],
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js",
+      "!**/setupTests.js",
+      "!**/styles/**",
+      "!**/helpers/firebaseConfig.ts",
+      "!**/types/**"
+    ]
+  }
 }

@@ -16,13 +16,13 @@ const boardStyle = StyleSheet.create({
     flex:1,
     aspectRatio: 1
   },
-  darkSquare:{
+  lightSquare:{
     backgroundColor: '#918151',
     aspectRatio:1,
     alignItems: 'center',
     justifyContent: 'center'
   },
-  lightSquare:{
+  darkSquare:{
     backgroundColor:'#556B25',
     aspectRatio:1,
     alignItems: 'center',

@@ -1,4 +1,5 @@
-export const chooseImage = (piece: string, color: 'w' | 'b'): string => {
+import {PieceType} from 'chess.js'
+export const chooseImage = (piece: PieceType, color: 'w' | 'b'): string => {
   if (color === 'b') {
     switch (piece) {
       case 'k':
@@ -30,5 +31,4 @@ export const chooseImage = (piece: string, color: 'w' | 'b'): string => {
         return 'whitePawn2';
     }
   }
-  throw Error('Not Possible');
 };

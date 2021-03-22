@@ -1,11 +1,21 @@
 import React from 'react'
 import {convertCoords} from '../../helpers/convertCoords';
 import {chooseImage} from '../../helpers/chooseImage';
+import firebaseConfig from '../../helpers/firebaseConfig';
 import {Chess, Piece} from 'chess.js';
 import {Image, View} from 'react-native';
 import {render} from '@testing-library/react-native';
+import pgnString from '../../helpers/pgnString'
+import firebase from 'firebase/app'
+
+//mock functions
+
 
 jest.mock('../../helpers/chooseImage');
+
+  
+ 
+
 
 describe('the function for converting numbers into algebraic notation',()=>{
   it('converts numbers properly',()=>{
@@ -30,6 +40,13 @@ describe('image selector',()=>{
     expect(chooseImage('p','b')).toEqual('blackPawn2');
   })
 })
+
+describe('pgnString',()=>{
+  it('converts the pgn into a string',()=>{
+    expect(pgnString('this is a test hello 1. hi')).toEqual('1. hi');
+  })
+})
+
 
 
 
